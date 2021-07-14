@@ -1,0 +1,16 @@
+version: "3"
+services:
+  websocket:
+    build: vehicle_emulator/
+    container_name: "vehicle_emulator"
+  websocket_reader:
+    build: websocket_reader/
+    container_name: "vehicle_reader"
+    depends_on:
+      - mongodb
+      - websocket
+    ports:
+      - 1234:1234
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
